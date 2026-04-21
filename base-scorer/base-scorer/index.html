@@ -577,7 +577,8 @@ async function analyzeWallet(address) {
   const txs    = txData.items || [];
   const tokens = tokenData.items || [];
   const ethBal = balData.coin_balance ? parseFloat(balData.coin_balance) / 1e18 : 0;
-
+  console.log('txData:', txData);
+  console.log('balData:', balData);
   const txCount         = txs.length;
   const uniqueContracts = new Set(txs.filter(t=>t.to&&t.to.hash!==address.toLowerCase()).map(t=>t.to.hash)).size;
   const uniqueTokens    = new Set(tokens.map(t=>t.token&&t.token.address)).size;
