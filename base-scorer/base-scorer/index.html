@@ -454,17 +454,7 @@
 <canvas id="base-canvas"></canvas>
 
 <script>
-// ── Farcaster Mini App init ──
-(function() {
-  try {
-    if (window.farcasterMiniApp) {
-      window.farcasterMiniApp.ready();
-    } else if (window.sdk && window.sdk.actions && window.sdk.actions.ready) {
-      window.sdk.actions.ready();
-    }
-  } catch(e) {}
-})();
-
+  
 // ── Config ──
 const BASESCAN_API = 'https://base.blockscout.com/api';
 const API_KEY = '';
