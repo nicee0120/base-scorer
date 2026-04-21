@@ -589,11 +589,7 @@ async function analyzeWallet(address) {
 
   return { score: Math.min(100, score), txCount, uniqueContracts, uniqueTokens, ethBal, ageMonths };
 }
-  const url = new URL(BASESCAN_API);
-  url.search = new URLSearchParams({ ...params }).toString();
-  const r = await fetch(url.toString());
-  return r.json();
-}
+  
 
 async function analyzeWallet(address) {
   const [txData, tokenData, balData] = await Promise.all([
