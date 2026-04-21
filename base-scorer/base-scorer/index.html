@@ -565,7 +565,39 @@ function setStatus(msg, type) {
 
 function isValidAddr(a) { return /^0x[0-9a-fA-F]{40}$/.test(a.trim()); }
 
-async function fetchBase(params) {
+async function analyzeWallet(address) {
+  const base = 'https://base.blockscout.com/api/v2';
+  
+  const [txData, tokenData, balData] = await Promise.all([
+    fetch(`${base}/addresses/${address}/transactions?filter=to%20%7C%20from`).then(r=>r.json()),
+    fetch(`${base}/addresses/${address}/token-transfers`).then(r=>r.json()),
+    fetch(`${base}/addresses/${address}`).then(r=>r.json()),
+  ]);
+
+  const txs    = txData.items || [];
+  const tokens = tokenData.items || [];
+  const ethBal = balData.coin_balance ? parseFloat(balData.coin_balance) / 1e18 : 0;
+
+  const txCount         = txs.length;
+  const uniqueContracts = new Set(txs.filter(t=>t.to&&t.to.hash!==address.toLowerCase()).map(t=>t.to.hash)).size;
+  const uniqueTokens    = new Set(tokens.map(t=>t.token&&t.token.address)).size;
+
+  const dates = txs.map(t=>new Date(t.timestamp)).filter(Boolean);
+  let ageMonths = 0;
+  if (dates.length > 1) {
+    const ms = Math.max(...dates) - Math.min(...dates);
+    ageMonths = Math.max(1, Math.round(ms / (1000*60*60*24*30)));
+  }
+
+  let score = 0;
+  score += Math.min(40, Math.floor(txCount / 2));
+  score += Math.min(20, uniqueContracts * 2);
+  score += Math.min(15, uniqueTokens * 3);
+  score += Math.min(15, ageMonths);
+  score += ethBal > 0.01 ? 10 : ethBal > 0 ? 5 : 0;
+
+  return { score: Math.min(100, score), txCount, uniqueContracts, uniqueTokens, ethBal, ageMonths };
+}
   const url = new URL(BASESCAN_API);
   url.search = new URLSearchParams({ ...params }).toString();
   const r = await fetch(url.toString());
