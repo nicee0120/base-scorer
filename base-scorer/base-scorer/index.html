@@ -212,11 +212,7 @@ async function analyzeWallet(address) {
 
   // Unique contracts interacted with (from first page of txs)
   const txItems = Array.isArray(txData.items) ? txData.items : [];
-  const uniqueContracts = new Set(
-    txItems
-      .filter(t => t.to && t.to.hash && t.to.hash.toLowerCase() !== addr)
-      .map(t => t.to.hash.toLowerCase())
-  ).size;
+  const uniqueContracts = countersData.token_transfers_count ? parseInt(countersData.token_transfers_count) : 0;
 
   // Activity span from first page txs
   const dates = txItems
