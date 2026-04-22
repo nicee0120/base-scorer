@@ -388,17 +388,18 @@ modeBtn.addEventListener('click', () => {
 });
 window.addEventListener('resize', () => { if (modeActive) canvasResize(); });
 </script>
-  <script src="https://cdn.jsdelivr.net/npm/@farcaster/frame-sdk@latest/dist/index.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@farcaster/frame-sdk/dist/index.umd.min.js"></script>
   <script>
-    window.addEventListener('load', async function() {
+    (async function() {
       try {
-        if (window.FrameSDK) {
-          await window.FrameSDK.actions.ready();
-        } else if (window.parent !== window) {
-          window.parent.postMessage({ type: 'frameReady' }, '*');
+        const sdk = window.farcaster || window.FrameSDK || (window.sdk);
+        if (sdk && sdk.actions && sdk.actions.ready) {
+          await sdk.actions.ready();
         }
-      } catch(e) {}
-    });
+      } catch(e) {
+        console.log('SDK not available:', e);
+      }
+    })();
   </script>
 </body>
 </html>
