@@ -1,16 +1,7 @@
 {
   "accountAssociation": {
-    "header": "",
-    "payload": "",
-    "signature": ""
-  },
-  "frame": {
-    "version": "1",
-    "name": "Base Wallet Scorer",
-    "iconUrl": "https://base-scorer.vercel.app/icon.png",
-    "homeUrl": "https://base-scorer.vercel.app",
-    "imageUrl": "https://base-scorer.vercel.app/og-image.png",
-    "buttonTitle": "Check Your Score",
-    "splashBackgroundColor": "#050A14"
+    "header": "eyJmaWQiOjg5MjQwNCwidHlwZSI6ImF1dGgiLCJrZXkiOiIweDY1Njk3ZjY4YmNhQTg2NzcxZDIwM2Y3NjA5MWUyZjQxYUQ2NDViMzMifQ",
+    "payload": "eyJkb21haW4iOiJiYXNlLXNjb3Jlci52ZXJjZWwuYXBwIn0",
+    "signature": "C+6IWYB14DSnORxvb1Fb5R/5q5bf5erJWP3n5ZRiDGo69UirhNQY/9QpJT4IA5+agEN2YLkWmlAfo1eHqM1/qxs="
   }
 }
