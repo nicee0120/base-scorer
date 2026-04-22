@@ -10,16 +10,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --blue: #0052FF;
-      --blue-light: #3375FF;
-      --bg: #050A14;
-      --bg2: #0A1120;
-      --bg3: #0F1A2E;
-      --border: rgba(0,82,255,0.2);
-      --text: #E8EEFF;
-      --text2: #7A90BB;
-      --font-display: 'Syne', sans-serif;
-      --font-mono: 'Space Mono', monospace;
+      --blue: #0052FF; --blue-light: #3375FF;
+      --bg: #050A14; --bg2: #0A1120; --bg3: #0F1A2E;
+      --border: rgba(0,82,255,0.2); --text: #E8EEFF; --text2: #7A90BB;
+      --font-display: 'Syne', sans-serif; --font-mono: 'Space Mono', monospace;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { background: var(--bg); color: var(--text); font-family: var(--font-display); min-height: 100vh; overflow-x: hidden; }
@@ -28,7 +22,7 @@
     .header { display: flex; align-items: center; gap: 12px; margin-bottom: 32px; padding-top: 8px; }
     .logo { width: 44px; height: 44px; background: var(--blue); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 0 20px rgba(0,82,255,0.4); }
     .logo svg { width: 24px; height: 24px; }
-    .header-text h1 { font-size: 18px; font-weight: 800; letter-spacing: -0.3px; color: var(--text); }
+    .header-text h1 { font-size: 18px; font-weight: 800; letter-spacing: -0.3px; }
     .header-text p { font-size: 12px; color: var(--text2); font-family: var(--font-mono); margin-top: 1px; }
     .search-box { display: flex; background: var(--bg2); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; transition: border-color 0.2s; }
     .search-box:focus-within { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(0,82,255,0.15); }
@@ -40,7 +34,7 @@
     .status-msg { font-size: 12px; font-family: var(--font-mono); margin-top: 8px; min-height: 18px; display: flex; align-items: center; gap: 8px; }
     .status-msg.error { color: #FF453A; }
     .status-msg.loading { color: var(--text2); }
-    .spinner { width: 12px; height: 12px; border: 2px solid rgba(255,255,255,0.1); border-top-color: var(--blue); border-radius: 50%; animation: spin 0.6s linear infinite; }
+    .spinner { width: 12px; height: 12px; border: 2px solid rgba(255,255,255,0.1); border-top-color: var(--blue); border-radius: 50%; animation: spin 0.6s linear infinite; flex-shrink: 0; }
     @keyframes spin { to { transform: rotate(360deg); } }
     .result-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 20px; padding: 24px; margin-top: 20px; display: none; animation: slideUp 0.4s cubic-bezier(0.34,1.56,0.64,1); }
     .result-card.visible { display: block; }
@@ -49,24 +43,24 @@
     .score-ring-wrap { position: relative; width: 90px; height: 90px; flex-shrink: 0; }
     .score-ring-wrap svg { transform: rotate(-90deg); }
     .score-center { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; }
-    .score-num { font-size: 26px; font-weight: 800; color: var(--text); line-height: 1; }
-    .score-label { font-size: 9px; color: var(--text2); font-family: var(--font-mono); letter-spacing: 0.5px; }
+    .score-num { font-size: 26px; font-weight: 800; line-height: 1; }
+    .score-label { font-size: 9px; color: var(--text2); font-family: var(--font-mono); }
     .verdict-wrap { flex: 1; min-width: 0; }
-    .verdict-title { font-size: 20px; font-weight: 800; line-height: 1.2; margin-bottom: 4px; word-break: break-word; }
+    .verdict-title { font-size: 20px; font-weight: 800; line-height: 1.2; margin-bottom: 4px; }
     .verdict-desc { font-size: 12px; color: var(--text2); line-height: 1.4; }
     .bar-wrap { height: 4px; background: rgba(255,255,255,0.06); border-radius: 99px; overflow: hidden; margin-bottom: 20px; }
     .bar-fill { height: 100%; border-radius: 99px; background: var(--blue); transition: width 1s cubic-bezier(0.34,1.56,0.64,1); width: 0%; }
     .quote-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; margin-bottom: 20px; position: relative; }
     .quote-mark { font-size: 32px; line-height: 1; color: var(--blue); font-family: Georgia, serif; position: absolute; top: 8px; left: 14px; opacity: 0.5; }
-    .quote-text { font-size: 13px; line-height: 1.6; color: var(--text); padding-top: 16px; font-style: italic; }
+    .quote-text { font-size: 13px; line-height: 1.6; padding-top: 16px; font-style: italic; }
     .quote-author { font-size: 11px; color: var(--text2); font-family: var(--font-mono); margin-top: 8px; }
     .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
     .stat-box { background: var(--bg3); border: 1px solid rgba(0,82,255,0.1); border-radius: 10px; padding: 10px 8px; text-align: center; }
-    .stat-val { font-size: 16px; font-weight: 700; color: var(--text); font-family: var(--font-mono); }
+    .stat-val { font-size: 16px; font-weight: 700; font-family: var(--font-mono); }
     .stat-lbl { font-size: 9px; color: var(--text2); margin-top: 3px; letter-spacing: 0.5px; text-transform: uppercase; }
     .mode-section { position: fixed; bottom: 0; left: 0; right: 0; padding: 16px 20px 28px; background: linear-gradient(transparent, var(--bg) 40%); display: flex; justify-content: center; z-index: 100; }
     #mode-btn { background: var(--blue); color: white; border: none; padding: 15px 40px; border-radius: 99px; font-family: var(--font-display); font-size: 15px; font-weight: 800; cursor: pointer; letter-spacing: 0.5px; transition: transform 0.15s, box-shadow 0.15s; box-shadow: 0 4px 24px rgba(0,82,255,0.4); max-width: 320px; width: 100%; }
-    #mode-btn:hover { transform: scale(1.03); box-shadow: 0 6px 32px rgba(0,82,255,0.6); }
+    #mode-btn:hover { transform: scale(1.03); }
     #mode-btn.active { background: #e00; box-shadow: 0 4px 24px rgba(220,0,0,0.4); }
     #base-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 9999; display: none; }
     #base-canvas.active { display: block; }
@@ -97,7 +91,9 @@
       <div class="score-ring-wrap">
         <svg width="90" height="90" viewBox="0 0 90 90">
           <circle cx="45" cy="45" r="38" fill="none" stroke="rgba(0,82,255,0.12)" stroke-width="7"/>
-          <circle id="ring-fill" cx="45" cy="45" r="38" fill="none" stroke="#0052FF" stroke-width="7" stroke-linecap="round" stroke-dasharray="238.76" stroke-dashoffset="238.76" style="transition: stroke-dashoffset 1.1s cubic-bezier(0.34,1.56,0.64,1)"/>
+          <circle id="ring-fill" cx="45" cy="45" r="38" fill="none" stroke="#0052FF" stroke-width="7"
+            stroke-linecap="round" stroke-dasharray="238.76" stroke-dashoffset="238.76"
+            style="transition:stroke-dashoffset 1.1s cubic-bezier(0.34,1.56,0.64,1)"/>
         </svg>
         <div class="score-center">
           <div class="score-num" id="score-num">0</div>
@@ -138,37 +134,35 @@ const VERDICTS = [
       {text:"You can tell people you discovered Base early. You'd be right.", author:'— General vibes, Base Discord'},
       {text:'The total value of your signed transactions has surpassed the GDP of a small village.', author:'— A completely biased calculator'},
     ]},
-  { min:50, title:'⚡ Active Builder', desc:"Solid activity. A few more txns from legendary.", color:'#3375FF',
+  { min:50, title:'⚡ Active Builder', desc:'Solid activity. A few more txns from legendary.', color:'#3375FF',
     quotes:[
-      {text:"Above average, but not yet mythical. Keep going — the chain is watching.", author:'— A motivational blockchain poster'},
-      {text:"This many transactions means either deep curiosity or a serious sleep disorder.", author:'— An anonymized on-chain analyst'},
+      {text:'Above average, but not yet mythical. Keep going — the chain is watching.', author:'— A motivational blockchain poster'},
+      {text:'This many transactions means either deep curiosity or a serious sleep disorder.', author:'— An anonymized on-chain analyst'},
       {text:"Classified as entry-level royalty. The crown is slightly crooked, but it's there.", author:'— Base Scorer, just now'},
     ]},
   { min:30, title:'🌱 Warming Up', desc:"Good start, but Base doesn't quite know you yet.", color:'#7A90BB',
     quotes:[
-      {text:"You have the wallet, you have the vibe — just missing the transactions.", author:'— An optimistic DeFi volunteer'},
+      {text:'You have the wallet, you have the vibe — just missing the transactions.', author:'— An optimistic DeFi volunteer'},
       {text:'Base network currently has you filed under "signed up, never showed up."', author:'— An imaginary Base attendance ledger'},
       {text:"With this score, even if you mint an NFT, they'll forget you next week.", author:'— A brutally honest algorithm'},
     ]},
   { min:10, title:'💤 Keep Building', desc:'Spend more time on the Base network.', color:'#7A90BB',
     quotes:[
-      {text:"Your wallet is open but just staring out the window. Have you tried going inside?", author:'— A metaphorical blockchain guide'},
+      {text:'Your wallet is open but just staring out the window. Have you tried going inside?', author:'— A metaphorical blockchain guide'},
       {text:"At this activity level, you're not an early adopter — you're a late sleeper.", author:'— Base network stats dept. (fictional)'},
       {text:"Your wallet is like a Safari tab nobody remembers loading.", author:'— A tired frontend developer'},
     ]},
   { min:0, title:'👻 Base Ghost', desc:'Where have you been?', color:'#3A4A66',
     quotes:[
-      {text:"This address is so empty, if you sent an echo it would come back confused.", author:'— A developer lost in terminal'},
-      {text:"You have a wallet, but it feels like you opened it just to say you have one. Classic.", author:'— A crypto career counselor (sad)'},
-      {text:"The Base network questioned why it was even bothered to look this up.", author:'— BaseScan server, inner monologue'},
+      {text:'This address is so empty, if you sent an echo it would come back confused.', author:'— A developer lost in terminal'},
+      {text:'You have a wallet, but it feels like you opened it just to say you have one. Classic.', author:'— A crypto career counselor (sad)'},
+      {text:'The Base network questioned why it was even bothered to look this up.', author:'— BaseScan server, inner monologue'},
     ]},
 ];
 
 function getVerdict(score) {
-  for (const v of VERDICTS) {
-    if (score >= v.min) return { ...v, quote: v.quotes[Math.floor(Math.random()*v.quotes.length)] };
-  }
-  return { ...VERDICTS[VERDICTS.length-1], quote: VERDICTS[VERDICTS.length-1].quotes[0] };
+  for (const v of VERDICTS) if (score >= v.min) return {...v, quote: v.quotes[Math.floor(Math.random()*v.quotes.length)]};
+  return {...VERDICTS[VERDICTS.length-1], quote: VERDICTS[VERDICTS.length-1].quotes[0]};
 }
 
 const walletInput = document.getElementById('wallet-input');
@@ -183,14 +177,11 @@ const barFill     = document.getElementById('bar-fill');
 const quoteText   = document.getElementById('quote-text');
 const quoteAuthor = document.getElementById('quote-author');
 const statsGrid   = document.getElementById('stats-grid');
-const modeBtn     = document.getElementById('mode-btn');
-const bCanvas     = document.getElementById('base-canvas');
-const bCtx        = bCanvas.getContext('2d');
 
 function setStatus(msg, type) {
   statusMsg.innerHTML = '';
-  statusMsg.className = 'status-msg ' + (type||'');
-  if (type==='loading') { const sp=document.createElement('div'); sp.className='spinner'; statusMsg.appendChild(sp); }
+  statusMsg.className = 'status-msg '+(type||'');
+  if (type==='loading') { const s=document.createElement('div'); s.className='spinner'; statusMsg.appendChild(s); }
   statusMsg.appendChild(document.createTextNode(msg));
 }
 
@@ -200,33 +191,47 @@ async function analyzeWallet(address) {
   const base = 'https://base.blockscout.com/api/v2';
   const addr = address.toLowerCase();
 
-  const [txData, tokenData, balData] = await Promise.all([
-    fetch(`${base}/addresses/${addr}/internal-transactions`).then(r=>r.json()),
-    fetch(`${base}/addresses/${addr}/token-transfers`).then(r=>r.json()),
+  // Fetch all data in parallel
+  const [addrData, txData, tokenData] = await Promise.all([
     fetch(`${base}/addresses/${addr}`).then(r=>r.json()),
+    fetch(`${base}/addresses/${addr}/transactions`).then(r=>r.json()),
+    fetch(`${base}/addresses/${addr}/token-transfers`).then(r=>r.json()),
   ]);
 
-  const txs    = Array.isArray(txData.items)    ? txData.items    : [];
-  const tokens = Array.isArray(tokenData.items) ? tokenData.items : [];
-  const ethBal = balData.coin_balance ? parseFloat(balData.coin_balance) / 1e18 : 0;
+  const isContract = addrData.is_contract === true;
+  const ethBal = addrData.coin_balance ? parseFloat(addrData.coin_balance) / 1e18 : 0;
 
-  const txCount = balData.transaction_count ? parseInt(balData.transaction_count) : txs.length;
+  // For contract wallets (smart wallets), use internal txs for count
+  let txCount = 0;
+  if (isContract) {
+    // Use transaction_count from address stats if available
+    const statsData = await fetch(`${base}/addresses/${addr}/counters`).then(r=>r.json()).catch(()=>({}));
+    txCount = statsData.transactions_count ? parseInt(statsData.transactions_count) :
+              (Array.isArray(txData.items) ? txData.items.length : 0);
+  } else {
+    txCount = Array.isArray(txData.items) ? txData.items.length : 0;
+  }
+
+  const txItems = Array.isArray(txData.items) ? txData.items : [];
+  const tokenItems = Array.isArray(tokenData.items) ? tokenData.items : [];
+
   const uniqueContracts = new Set(
-    txs.filter(t => t.to && t.to.hash && t.to.hash.toLowerCase() !== addr)
-       .map(t => t.to.hash.toLowerCase())
-  ).size;
-  const uniqueTokens = new Set(
-    tokens.filter(t => t.token && t.token.address).map(t => t.token.address)
+    txItems.filter(t => t.to && t.to.hash && t.to.hash.toLowerCase() !== addr)
+           .map(t => t.to.hash.toLowerCase())
   ).size;
 
-  const dates = txs.map(t => t.timestamp ? new Date(t.timestamp).getTime() : null).filter(Boolean);
+  const uniqueTokens = new Set(
+    tokenItems.filter(t => t.token && t.token.address).map(t => t.token.address)
+  ).size;
+
+  const dates = txItems.map(t => t.timestamp ? new Date(t.timestamp).getTime() : null).filter(Boolean);
   let ageMonths = 0;
   if (dates.length > 1) {
     ageMonths = Math.max(1, Math.round((Math.max(...dates) - Math.min(...dates)) / (1000*60*60*24*30)));
   }
 
   let score = 0;
-  score += Math.min(40, Math.floor(txCount / 2));
+  score += Math.min(40, Math.floor(txCount / 15));
   score += Math.min(20, uniqueContracts * 2);
   score += Math.min(15, uniqueTokens * 3);
   score += Math.min(15, ageMonths);
@@ -240,11 +245,11 @@ function animateScore(target, color) {
   setTimeout(() => {
     ringFill.style.strokeDashoffset = offset;
     ringFill.style.stroke = color;
-    barFill.style.width   = target + '%';
+    barFill.style.width = target+'%';
     barFill.style.background = color;
   }, 80);
   let cur = 0;
-  const step = () => { cur = Math.min(cur+2, target); scoreNum.textContent = cur; if(cur<target) requestAnimationFrame(step); };
+  const step = () => { cur=Math.min(cur+2,target); scoreNum.textContent=cur; if(cur<target) requestAnimationFrame(step); };
   requestAnimationFrame(step);
 }
 
@@ -252,7 +257,7 @@ searchBtn.addEventListener('click', async () => {
   const addr = walletInput.value.trim();
   statusMsg.innerHTML = '';
   resultCard.classList.remove('visible');
-  if (!addr)       { setStatus('Please enter a wallet address.', 'error'); return; }
+  if (!addr) { setStatus('Please enter a wallet address.', 'error'); return; }
   if (!isValid(addr)) { setStatus('Invalid Ethereum/Base address format.', 'error'); return; }
   searchBtn.disabled = true;
   setStatus('Querying Base network...', 'loading');
@@ -266,12 +271,12 @@ searchBtn.addEventListener('click', async () => {
     quoteText.textContent    = v.quote.text;
     quoteAuthor.textContent  = v.quote.author;
     statsGrid.innerHTML = [
-      {val:data.txCount,       lbl:'Transactions'},
-      {val:data.uniqueContracts, lbl:'Contracts'},
-      {val:data.uniqueTokens,  lbl:'Tokens'},
-      {val:data.ethBal.toFixed(4)+' ETH', lbl:'Balance'},
-      {val:data.ageMonths>0 ? data.ageMonths+' mo' : '—', lbl:'Active span'},
-      {val:data.score+'/100',  lbl:'Score'},
+      {val: data.txCount,        lbl: 'Transactions'},
+      {val: data.uniqueContracts, lbl: 'Contracts'},
+      {val: data.uniqueTokens,   lbl: 'Tokens'},
+      {val: data.ethBal.toFixed(4)+' ETH', lbl: 'Balance'},
+      {val: data.ageMonths > 0 ? data.ageMonths+' mo' : '—', lbl: 'Active span'},
+      {val: data.score+'/100',   lbl: 'Score'},
     ].map(s=>`<div class="stat-box"><div class="stat-val">${s.val}</div><div class="stat-lbl">${s.lbl}</div></div>`).join('');
     resultCard.classList.add('visible');
     animateScore(data.score, v.color);
@@ -284,102 +289,40 @@ searchBtn.addEventListener('click', async () => {
 
 walletInput.addEventListener('keydown', e => { if(e.key==='Enter') searchBtn.click(); });
 
-// BASE MODE
+// ── BASE MODE ──
+const modeBtn  = document.getElementById('mode-btn');
+const bCanvas  = document.getElementById('base-canvas');
+const bCtx     = bCanvas.getContext('2d');
 let particles=[], fireworks=[], rockets=[], animId=null, modeActive=false;
 const COLORS=['#0052FF','#FF3B30','#FFD60A','#34C759','#FF9F0A','#BF5AF2','#FF375F','#30D158','#32ADE6','#fff'];
 const WORDS=['BASE','BASE','BASE','base','BASE!','🔵 BASE','ON-CHAIN','gm frens','wen moon','BASE'];
-
-function canvasResize() { bCanvas.width=window.innerWidth; bCanvas.height=window.innerHeight; }
-function randColor() { return COLORS[Math.floor(Math.random()*COLORS.length)]; }
-function randWord()  { return WORDS[Math.floor(Math.random()*WORDS.length)]; }
-
-function spawnWord() {
-  particles.push({ word:randWord(), size:20+Math.random()*65, x:Math.random()*bCanvas.width, y:bCanvas.height+80,
-    vx:(Math.random()-0.5)*5, vy:-(3+Math.random()*9), color:randColor(),
-    angle:(Math.random()-0.5)*0.9, rotSpeed:(Math.random()-0.5)*0.06,
-    opacity:0.75+Math.random()*0.25, life:150+Math.random()*120, maxLife:270,
-    wobble:Math.random()*Math.PI*2, wobbleSpeed:0.03+Math.random()*0.04, wobbleAmp:1+Math.random()*2.5 });
-}
-
-function explodeAt(x, y, color) {
-  const count = 20+Math.floor(Math.random()*14);
-  for (let i=0;i<count;i++) {
-    const angle=(i/count)*Math.PI*2, speed=3+Math.random()*7;
-    fireworks.push({ x, y, vx:Math.cos(angle)*speed, vy:Math.sin(angle)*speed,
-      color:Math.random()<0.5?color:randColor(), word:Math.random()<0.5?randWord():null,
-      size:7+Math.random()*20, life:60+Math.random()*50, maxLife:110,
-      isText:Math.random()<0.45, angle:Math.random()*Math.PI*2, rotSpeed:(Math.random()-0.5)*0.14, trail:[] });
-  }
-  particles.push({ word:'BASE', size:44+Math.random()*24, x, y, vx:0, vy:-0.6, color,
-    angle:0, rotSpeed:0, opacity:1, life:50, maxLife:50, wobble:0, wobbleSpeed:0, wobbleAmp:0 });
-}
-
-function spawnFirework() { explodeAt(80+Math.random()*(bCanvas.width-160), bCanvas.height*(0.1+Math.random()*0.55), randColor()); }
-
-function spawnRocket() {
-  rockets.push({ x:60+Math.random()*(bCanvas.width-120), y:bCanvas.height+10,
-    vx:(Math.random()-0.5)*2, vy:-(8+Math.random()*6), color:randColor(),
-    life:45+Math.floor(Math.random()*20), maxLife:65, trail:[] });
-}
-
-function drawLoop() {
-  if (!modeActive) return;
+function canvasResize(){bCanvas.width=window.innerWidth;bCanvas.height=window.innerHeight;}
+function rc(){return COLORS[Math.floor(Math.random()*COLORS.length)];}
+function rw(){return WORDS[Math.floor(Math.random()*WORDS.length)];}
+function spawnWord(){particles.push({word:rw(),size:20+Math.random()*65,x:Math.random()*bCanvas.width,y:bCanvas.height+80,vx:(Math.random()-.5)*5,vy:-(3+Math.random()*9),color:rc(),angle:(Math.random()-.5)*.9,rotSpeed:(Math.random()-.5)*.06,opacity:.75+Math.random()*.25,life:150+Math.random()*120,maxLife:270,wobble:Math.random()*Math.PI*2,wobbleSpeed:.03+Math.random()*.04,wobbleAmp:1+Math.random()*2.5});}
+function explodeAt(x,y,color){const n=20+Math.floor(Math.random()*14);for(let i=0;i<n;i++){const a=(i/n)*Math.PI*2,s=3+Math.random()*7;fireworks.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,color:Math.random()<.5?color:rc(),word:Math.random()<.5?rw():null,size:7+Math.random()*20,life:60+Math.random()*50,maxLife:110,isText:Math.random()<.45,angle:Math.random()*Math.PI*2,rotSpeed:(Math.random()-.5)*.14,trail:[]});}particles.push({word:'BASE',size:44+Math.random()*24,x,y,vx:0,vy:-.6,color,angle:0,rotSpeed:0,opacity:1,life:50,maxLife:50,wobble:0,wobbleSpeed:0,wobbleAmp:0});}
+function spawnFirework(){explodeAt(80+Math.random()*(bCanvas.width-160),bCanvas.height*(.1+Math.random()*.55),rc());}
+function spawnRocket(){rockets.push({x:60+Math.random()*(bCanvas.width-120),y:bCanvas.height+10,vx:(Math.random()-.5)*2,vy:-(8+Math.random()*6),color:rc(),life:45+Math.floor(Math.random()*20),maxLife:65,trail:[]});}
+function drawLoop(){
+  if(!modeActive)return;
   bCtx.clearRect(0,0,bCanvas.width,bCanvas.height);
-  if (Math.random()<0.28) spawnWord();
-  if (Math.random()<0.04) spawnFirework();
-  if (Math.random()<0.03) spawnRocket();
-
-  rockets.forEach(r => {
-    r.trail.push({x:r.x,y:r.y});
-    if (r.trail.length>14) r.trail.shift();
-    r.trail.forEach((t,i) => { bCtx.save(); bCtx.globalAlpha=(i/r.trail.length)*0.6; bCtx.fillStyle=r.color; bCtx.beginPath(); bCtx.arc(t.x,t.y,3-(i/r.trail.length)*2.5,0,Math.PI*2); bCtx.fill(); bCtx.restore(); });
-    bCtx.save(); bCtx.globalAlpha=r.life/r.maxLife; bCtx.font='900 20px sans-serif'; bCtx.fillText('🚀',r.x-10,r.y+10); bCtx.restore();
-    r.x+=r.vx; r.y+=r.vy; r.vy+=0.06; r.life--;
-    if (r.life<=0) explodeAt(r.x,r.y,r.color);
-  });
+  if(Math.random()<.28)spawnWord();
+  if(Math.random()<.04)spawnFirework();
+  if(Math.random()<.03)spawnRocket();
+  rockets.forEach(r=>{r.trail.push({x:r.x,y:r.y});if(r.trail.length>14)r.trail.shift();r.trail.forEach((t,i)=>{bCtx.save();bCtx.globalAlpha=(i/r.trail.length)*.6;bCtx.fillStyle=r.color;bCtx.beginPath();bCtx.arc(t.x,t.y,3-(i/r.trail.length)*2.5,0,Math.PI*2);bCtx.fill();bCtx.restore();});bCtx.save();bCtx.globalAlpha=r.life/r.maxLife;bCtx.font='900 20px sans-serif';bCtx.fillText('🚀',r.x-10,r.y+10);bCtx.restore();r.x+=r.vx;r.y+=r.vy;r.vy+=.06;r.life--;if(r.life<=0)explodeAt(r.x,r.y,r.color);});
   rockets=rockets.filter(r=>r.life>0);
-
-  fireworks.forEach(f => {
-    f.trail.push({x:f.x,y:f.y});
-    if (f.trail.length>7) f.trail.shift();
-    f.trail.forEach((t,i) => { bCtx.save(); bCtx.globalAlpha=(i/f.trail.length)*0.35*(f.life/f.maxLife); bCtx.fillStyle=f.color; bCtx.beginPath(); bCtx.arc(t.x,t.y,2,0,Math.PI*2); bCtx.fill(); bCtx.restore(); });
-    bCtx.save(); bCtx.globalAlpha=(f.life/f.maxLife)*0.92; bCtx.translate(f.x,f.y); bCtx.rotate(f.angle);
-    if (f.isText&&f.word) { bCtx.font=`900 ${Math.round(f.size)}px sans-serif`; bCtx.fillStyle=f.color; bCtx.shadowColor=f.color; bCtx.shadowBlur=6; bCtx.fillText(f.word,0,0); }
-    else { bCtx.fillStyle=f.color; bCtx.shadowColor=f.color; bCtx.shadowBlur=10; bCtx.beginPath(); bCtx.arc(0,0,f.size/2,0,Math.PI*2); bCtx.fill(); }
-    bCtx.restore();
-    f.x+=f.vx; f.y+=f.vy; f.vy+=0.09; f.vx*=0.98; f.angle+=f.rotSpeed; f.life--;
-  });
+  fireworks.forEach(f=>{f.trail.push({x:f.x,y:f.y});if(f.trail.length>7)f.trail.shift();f.trail.forEach((t,i)=>{bCtx.save();bCtx.globalAlpha=(i/f.trail.length)*.35*(f.life/f.maxLife);bCtx.fillStyle=f.color;bCtx.beginPath();bCtx.arc(t.x,t.y,2,0,Math.PI*2);bCtx.fill();bCtx.restore();});bCtx.save();bCtx.globalAlpha=(f.life/f.maxLife)*.92;bCtx.translate(f.x,f.y);bCtx.rotate(f.angle);if(f.isText&&f.word){bCtx.font=`900 ${Math.round(f.size)}px sans-serif`;bCtx.fillStyle=f.color;bCtx.shadowColor=f.color;bCtx.shadowBlur=6;bCtx.fillText(f.word,0,0);}else{bCtx.fillStyle=f.color;bCtx.shadowColor=f.color;bCtx.shadowBlur=10;bCtx.beginPath();bCtx.arc(0,0,f.size/2,0,Math.PI*2);bCtx.fill();}bCtx.restore();f.x+=f.vx;f.y+=f.vy;f.vy+=.09;f.vx*=.98;f.angle+=f.rotSpeed;f.life--;});
   fireworks=fireworks.filter(f=>f.life>0);
-
-  particles.forEach(p => {
-    p.wobble+=p.wobbleSpeed;
-    bCtx.save(); bCtx.globalAlpha=p.opacity*(p.life/p.maxLife);
-    bCtx.translate(p.x+Math.sin(p.wobble)*p.wobbleAmp,p.y); bCtx.rotate(p.angle);
-    bCtx.font=`900 ${Math.round(p.size)}px sans-serif`; bCtx.fillStyle=p.color;
-    bCtx.shadowColor=p.color; bCtx.shadowBlur=p.maxLife===50?24:8; bCtx.fillText(p.word,0,0);
-    bCtx.restore();
-    p.x+=p.vx; p.y+=p.vy; p.vy+=0.035; p.angle+=p.rotSpeed; p.life--;
-  });
+  particles.forEach(p=>{p.wobble+=p.wobbleSpeed;bCtx.save();bCtx.globalAlpha=p.opacity*(p.life/p.maxLife);bCtx.translate(p.x+Math.sin(p.wobble)*p.wobbleAmp,p.y);bCtx.rotate(p.angle);bCtx.font=`900 ${Math.round(p.size)}px sans-serif`;bCtx.fillStyle=p.color;bCtx.shadowColor=p.color;bCtx.shadowBlur=p.maxLife===50?24:8;bCtx.fillText(p.word,0,0);bCtx.restore();p.x+=p.vx;p.y+=p.vy;p.vy+=.035;p.angle+=p.rotSpeed;p.life--;});
   particles=particles.filter(p=>p.life>0&&p.y>-400);
   animId=requestAnimationFrame(drawLoop);
 }
-
-modeBtn.addEventListener('click', () => {
+modeBtn.addEventListener('click',()=>{
   modeActive=!modeActive;
-  if (modeActive) {
-    modeBtn.textContent='🔴 BASE MODE OFF'; modeBtn.classList.add('active');
-    bCanvas.classList.add('active'); canvasResize();
-    for(let i=0;i<5;i++) setTimeout(spawnFirework,i*100);
-    for(let i=0;i<3;i++) setTimeout(spawnRocket,i*150);
-    drawLoop();
-  } else {
-    modeBtn.textContent='⚡ BASE MODE ON'; modeBtn.classList.remove('active');
-    bCanvas.classList.remove('active'); cancelAnimationFrame(animId);
-    bCtx.clearRect(0,0,bCanvas.width,bCanvas.height);
-    particles=[]; fireworks=[]; rockets=[];
-  }
+  if(modeActive){modeBtn.textContent='🔴 BASE MODE OFF';modeBtn.classList.add('active');bCanvas.classList.add('active');canvasResize();for(let i=0;i<5;i++)setTimeout(spawnFirework,i*100);for(let i=0;i<3;i++)setTimeout(spawnRocket,i*150);drawLoop();}
+  else{modeBtn.textContent='⚡ BASE MODE ON';modeBtn.classList.remove('active');bCanvas.classList.remove('active');cancelAnimationFrame(animId);bCtx.clearRect(0,0,bCanvas.width,bCanvas.height);particles=[];fireworks=[];rockets=[];}
 });
-window.addEventListener('resize', ()=>{ if(modeActive) canvasResize(); });
+window.addEventListener('resize',()=>{if(modeActive)canvasResize();});
 </script>
 </body>
 </html>
