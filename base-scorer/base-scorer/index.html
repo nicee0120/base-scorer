@@ -6,6 +6,7 @@
   <title>Base Wallet Scorer</title>
   <meta property="og:title" content="Base Wallet Scorer" />
   <meta property="og:description" content="Are you the King of Base? Find out now." />
+  <meta name="fc:frame" content='{"version":"next","imageUrl":"https://base-scorer.vercel.app/og-image.png","button":{"title":"Check Your Score","action":{"type":"launch_frame","name":"Base Wallet Scorer","url":"https://base-scorer.vercel.app","splashBackgroundColor":"#050A14"}}}' />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
@@ -212,7 +213,11 @@ async function analyzeWallet(address) {
 
   // Unique contracts interacted with (from first page of txs)
   const txItems = Array.isArray(txData.items) ? txData.items : [];
-  const uniqueContracts = countersData.token_transfers_count ? parseInt(countersData.token_transfers_count) : 0;
+  const uniqueContracts = new Set(
+    txItems
+      .filter(t => t.to && t.to.hash && t.to.hash.toLowerCase() !== addr)
+      .map(t => t.to.hash.toLowerCase())
+  ).size;
 
   // Activity span from first page txs
   const dates = txItems
@@ -269,7 +274,7 @@ searchBtn.addEventListener('click', async () => {
     statsGrid.innerHTML = [
       { val: data.txCount,                              lbl: 'Transactions' },
       { val: data.uniqueContracts,                      lbl: 'Token Transfers' },
-      { val: data.tokenCount + '+', lbl: 'Tokens' },
+      { val: data.tokenCount,                           lbl: 'Tokens'       },
       { val: data.ethBal.toFixed(4) + ' ETH',          lbl: 'Balance'      },
       { val: data.ageMonths > 0 ? data.ageMonths + ' mo' : '—', lbl: 'Active span' },
       { val: data.score + '/100',                       lbl: 'Score'        },
