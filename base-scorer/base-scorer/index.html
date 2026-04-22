@@ -201,7 +201,7 @@ async function analyzeWallet(address) {
   const addr = address.toLowerCase();
 
   const [txData, tokenData, balData] = await Promise.all([
-    fetch(`${base}/addresses/${addr}/transactions`).then(r=>r.json()),
+    fetch(`${base}/addresses/${addr}/internal-transactions`).then(r=>r.json()),
     fetch(`${base}/addresses/${addr}/token-transfers`).then(r=>r.json()),
     fetch(`${base}/addresses/${addr}`).then(r=>r.json()),
   ]);
