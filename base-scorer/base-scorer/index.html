@@ -213,11 +213,7 @@ async function analyzeWallet(address) {
 
   // Unique contracts interacted with (from first page of txs)
   const txItems = Array.isArray(txData.items) ? txData.items : [];
-  const uniqueContracts = new Set(
-    txItems
-      .filter(t => t.to && t.to.hash && t.to.hash.toLowerCase() !== addr)
-      .map(t => t.to.hash.toLowerCase())
-  ).size;
+  const uniqueContracts = countersData.token_transfers_count ? parseInt(countersData.token_transfers_count) : 0;
 
   // Activity span from first page txs
   const dates = txItems
@@ -274,7 +270,7 @@ searchBtn.addEventListener('click', async () => {
     statsGrid.innerHTML = [
       { val: data.txCount,                              lbl: 'Transactions' },
       { val: data.uniqueContracts,                      lbl: 'Token Transfers' },
-      { val: data.tokenCount,                           lbl: 'Tokens'       },
+      { val: data.tokenCount + '+',                      lbl: 'Tokens'       },
       { val: data.ethBal.toFixed(4) + ' ETH',          lbl: 'Balance'      },
       { val: data.ageMonths > 0 ? data.ageMonths + ' mo' : '—', lbl: 'Active span' },
       { val: data.score + '/100',                       lbl: 'Score'        },
