@@ -269,7 +269,7 @@ searchBtn.addEventListener('click', async () => {
     statsGrid.innerHTML = [
       { val: data.txCount,                              lbl: 'Transactions' },
       { val: data.uniqueContracts,                      lbl: 'Token Transfers' },
-      { val: data.tokenCount,                           lbl: 'Tokens'       },
+      { val: data.tokenCount + '+', lbl: 'Tokens' },
       { val: data.ethBal.toFixed(4) + ' ETH',          lbl: 'Balance'      },
       { val: data.ageMonths > 0 ? data.ageMonths + ' mo' : '—', lbl: 'Active span' },
       { val: data.score + '/100',                       lbl: 'Score'        },
