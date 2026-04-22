@@ -388,5 +388,17 @@ modeBtn.addEventListener('click', () => {
 });
 window.addEventListener('resize', () => { if (modeActive) canvasResize(); });
 </script>
+  <script src="https://cdn.jsdelivr.net/npm/@farcaster/frame-sdk@latest/dist/index.umd.min.js"></script>
+  <script>
+    window.addEventListener('load', async function() {
+      try {
+        if (window.FrameSDK) {
+          await window.FrameSDK.actions.ready();
+        } else if (window.parent !== window) {
+          window.parent.postMessage({ type: 'frameReady' }, '*');
+        }
+      } catch(e) {}
+    });
+  </script>
 </body>
 </html>
