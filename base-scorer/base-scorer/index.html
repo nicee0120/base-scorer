@@ -64,6 +64,183 @@
     #mode-btn.active { background: #e00; box-shadow: 0 4px 24px rgba(220,0,0,0.4); }
     #base-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 9999; display: none; }
     #base-canvas.active { display: block; }
+
+    .azul-section {
+      background: var(--bg2);
+      border: 1px solid rgba(0,120,255,0.3);
+      border-radius: 20px;
+      padding: 24px;
+      margin-top: 20px;
+    }
+
+    .azul-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .azul-badge {
+      background: #0052FF;
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 99px;
+      letter-spacing: 1px;
+    }
+
+    .azul-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .azul-desc {
+      font-size: 12px;
+      color: var(--text2);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .azul-features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .azul-feat {
+      background: var(--bg3);
+      border: 1px solid rgba(0,82,255,0.1);
+      border-radius: 10px;
+      padding: 10px 8px;
+      text-align: center;
+    }
+
+    .azul-feat-val {
+      font-size: 14px;
+      font-weight: 700;
+      color: #0052FF;
+      font-family: var(--font-mono);
+    }
+
+    .azul-feat-lbl {
+      font-size: 9px;
+      color: var(--text2);
+      margin-top: 3px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .countdown-wrap {
+      background: var(--bg3);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .countdown-label {
+      font-size: 11px;
+      color: var(--text2);
+      font-family: var(--font-mono);
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .countdown-timer {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .countdown-unit {
+      text-align: center;
+    }
+
+    .countdown-num {
+      font-size: 28px;
+      font-weight: 800;
+      color: #0052FF;
+      font-family: var(--font-mono);
+      line-height: 1;
+    }
+
+    .countdown-lbl {
+      font-size: 9px;
+      color: var(--text2);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .azul-tx-btn {
+      width: 100%;
+      background: #0052FF;
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: 0.3px;
+      transition: opacity 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .azul-tx-btn:hover { opacity: 0.85; }
+    .azul-tx-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .azul-result {
+      display: none;
+      margin-top: 14px;
+      background: var(--bg3);
+      border: 1px solid rgba(0,255,100,0.2);
+      border-radius: 12px;
+      padding: 14px;
+    }
+
+    .azul-result.visible { display: block; }
+
+    .azul-result-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #34C759;
+      margin-bottom: 8px;
+    }
+
+    .azul-result-hash {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      color: var(--text2);
+      word-break: break-all;
+    }
+
+    .azul-result-link {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 12px;
+      color: #0052FF;
+      text-decoration: none;
+      font-family: var(--font-mono);
+    }
+
+    .azul-status {
+      font-size: 12px;
+      color: var(--text2);
+      font-family: var(--font-mono);
+      margin-top: 8px;
+      min-height: 16px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .azul-status.error { color: #FF453A; }
   </style>
 </head>
 <body>
@@ -113,6 +290,68 @@
     </div>
     <div class="stats-grid" id="stats-grid"></div>
   </div>
+
+<div class="azul-section" id="azul-section">
+  <div class="azul-header">
+    <span class="azul-badge">AZUL</span>
+    <span class="azul-title">Base Azul Upgrade</span>
+  </div>
+  <p class="azul-desc">
+    Base's first independent network upgrade. Multiproof security (TEE + ZK), 5,000 TPS, 99% fewer empty blocks. Live on testnet now — mainnet activation on May 13.
+  </p>
+
+  <div class="azul-features">
+    <div class="azul-feat">
+      <div class="azul-feat-val">5,000</div>
+      <div class="azul-feat-lbl">TPS</div>
+    </div>
+    <div class="azul-feat">
+      <div class="azul-feat-val">~1 day</div>
+      <div class="azul-feat-lbl">Withdrawal</div>
+    </div>
+    <div class="azul-feat">
+      <div class="azul-feat-val">-99%</div>
+      <div class="azul-feat-lbl">Empty blocks</div>
+    </div>
+  </div>
+
+  <div class="countdown-wrap">
+    <div class="countdown-label">MAINNET ACTIVATION IN</div>
+    <div class="countdown-timer">
+      <div class="countdown-unit">
+        <div class="countdown-num" id="cd-days">--</div>
+        <div class="countdown-lbl">Days</div>
+      </div>
+      <div class="countdown-unit" style="padding-top:4px;font-size:20px;font-weight:800;color:#0052FF;">:</div>
+      <div class="countdown-unit">
+        <div class="countdown-num" id="cd-hours">--</div>
+        <div class="countdown-lbl">Hours</div>
+      </div>
+      <div class="countdown-unit" style="padding-top:4px;font-size:20px;font-weight:800;color:#0052FF;">:</div>
+      <div class="countdown-unit">
+        <div class="countdown-num" id="cd-mins">--</div>
+        <div class="countdown-lbl">Mins</div>
+      </div>
+      <div class="countdown-unit" style="padding-top:4px;font-size:20px;font-weight:800;color:#0052FF;">:</div>
+      <div class="countdown-unit">
+        <div class="countdown-num" id="cd-secs">--</div>
+        <div class="countdown-lbl">Secs</div>
+      </div>
+    </div>
+  </div>
+
+  <button class="azul-tx-btn" id="azul-btn">
+    Send AZUL Testnet TX
+  </button>
+  <div class="azul-status" id="azul-status"></div>
+
+  <div class="azul-result" id="azul-result">
+    <div class="azul-result-title">AZUL Testnet TX sent!</div>
+    <div class="azul-result-hash" id="azul-tx-hash"></div>
+    <a class="azul-result-link" id="azul-tx-link" href="#" target="_blank">View on BaseScan Sepolia</a>
+  </div>
+</div>
+
 </div>
 
 <div class="mode-section">
@@ -387,6 +626,103 @@ modeBtn.addEventListener('click', () => {
   }
 });
 window.addEventListener('resize', () => { if (modeActive) canvasResize(); });
+
+// ── AZUL COUNTDOWN ──
+function updateCountdown() {
+  const target = new Date('2025-05-13T00:00:00UTC');
+  const now = new Date();
+  const diff = target - now;
+  if (diff <= 0) {
+    document.getElementById('cd-days').textContent = '00';
+    document.getElementById('cd-hours').textContent = '00';
+    document.getElementById('cd-mins').textContent = '00';
+    document.getElementById('cd-secs').textContent = '00';
+    document.getElementById('azul-btn').textContent = 'AZUL is LIVE on Mainnet!';
+    document.getElementById('azul-btn').disabled = true;
+    return;
+  }
+  const days  = Math.floor(diff / (1000*60*60*24));
+  const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+  const mins  = Math.floor((diff % (1000*60*60)) / (1000*60));
+  const secs  = Math.floor((diff % (1000*60)) / 1000);
+  document.getElementById('cd-days').textContent  = String(days).padStart(2,'0');
+  document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
+  document.getElementById('cd-mins').textContent  = String(mins).padStart(2,'0');
+  document.getElementById('cd-secs').textContent  = String(secs).padStart(2,'0');
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// ── AZUL TX ──
+const BASE_SEPOLIA_CHAIN_ID = '0x14a34';
+const BASE_SEPOLIA_PARAMS = {
+  chainId: BASE_SEPOLIA_CHAIN_ID,
+  chainName: 'Base Sepolia Testnet',
+  nativeCurrency: { name: 'Ethereum', symbol: 'ETH', decimals: 18 },
+  rpcUrls: ['https://sepolia.base.org'],
+  blockExplorerUrls: ['https://sepolia.basescan.org'],
+};
+
+document.getElementById('azul-btn').addEventListener('click', async () => {
+  const btn = document.getElementById('azul-btn');
+  const status = document.getElementById('azul-status');
+  const result = document.getElementById('azul-result');
+
+  if (!window.ethereum) {
+    status.className = 'azul-status error';
+    status.textContent = 'MetaMask not found. Please install MetaMask.';
+    return;
+  }
+
+  try {
+    btn.disabled = true;
+    status.className = 'azul-status';
+    status.textContent = 'Connecting to MetaMask...';
+    result.classList.remove('visible');
+
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    const from = accounts[0];
+
+    status.textContent = 'Switching to Base Sepolia...';
+    try {
+      await window.ethereum.request({
+        method: 'wallet_switchEthereumChain',
+        params: [{ chainId: BASE_SEPOLIA_CHAIN_ID }],
+      });
+    } catch (switchErr) {
+      if (switchErr.code === 4902) {
+        await window.ethereum.request({
+          method: 'wallet_addEthereumChain',
+          params: [BASE_SEPOLIA_PARAMS],
+        });
+      } else throw switchErr;
+    }
+
+    status.textContent = 'Sending AZUL testnet TX...';
+
+    const txHash = await window.ethereum.request({
+      method: 'eth_sendTransaction',
+      params: [{
+        from,
+        to: from,
+        value: '0x0',
+        data: '0x415a554c',
+      }],
+    });
+
+    document.getElementById('azul-tx-hash').textContent = txHash;
+    document.getElementById('azul-tx-link').href = 'https://sepolia.basescan.org/tx/' + txHash;
+    result.classList.add('visible');
+    status.textContent = '';
+    btn.textContent = 'TX sent!';
+  } catch(e) {
+    status.className = 'azul-status error';
+    status.textContent = e.code === 4001 ? 'Transaction rejected.' : 'Error: ' + (e.message || 'Unknown error');
+    btn.disabled = false;
+    btn.textContent = 'Send AZUL Testnet TX';
+  }
+});
+
 </script>
   <script type="module">
     import { sdk } from "https://esm.sh/@farcaster/frame-sdk";
