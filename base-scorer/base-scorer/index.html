@@ -241,6 +241,34 @@
     }
 
     .azul-status.error { color: #FF453A; }
+
+    .tx-timer {
+      display: none;
+      margin-top: 12px;
+      text-align: center;
+    }
+    .tx-timer.visible { display: block; }
+    .tx-timer-num {
+      font-size: 48px;
+      font-weight: 800;
+      color: #0052FF;
+      font-family: var(--font-mono);
+      line-height: 1;
+    }
+    .tx-timer-label {
+      font-size: 11px;
+      color: var(--text2);
+      font-family: var(--font-mono);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+    .tx-timer-done {
+      font-size: 15px;
+      font-weight: 700;
+      color: #34C759;
+      margin-top: 6px;
+    }
   </style>
 </head>
 <body>
@@ -297,7 +325,7 @@
     <span class="azul-title">Base Azul Upgrade</span>
   </div>
   <p class="azul-desc">
-    Base's first independent network upgrade. Multiproof security (TEE + ZK), 5,000 TPS, 99% fewer empty blocks. Live on testnet now mainnet activation on May 13.
+    Base's first independent network upgrade. Multiproof security (TEE + ZK), 5,000 TPS, 99% fewer empty blocks. Live on testnet now — mainnet activation on May 13.
   </p>
 
   <div class="azul-features">
@@ -341,7 +369,7 @@
   </div>
 
   <button class="azul-tx-btn" id="azul-btn">
-    Test AZUL on Sepolia
+    Send AZUL Testnet TX
   </button>
   <div class="azul-status" id="azul-status"></div>
 
@@ -530,7 +558,7 @@ const bCanvas = document.getElementById('base-canvas');
 const bCtx    = bCanvas.getContext('2d');
 let particles = [], fireworks = [], rockets = [], animId = null, modeActive = false;
 const COLORS = ['#0052FF','#FF3B30','#FFD60A','#34C759','#FF9F0A','#BF5AF2','#FF375F','#30D158','#32ADE6','#fff'];
-const WORDS  = ['BASE','AZUL','COINBASE','BASEAPP','ON-CHAIN','gm frens','BASE!','🔵 BASE','BLUE','L2','ONCHAIN','BASED','wen moon','AZUL!','cb wallet','BASE','AZUL','COINBASE'];
+const WORDS  = ['BASE','BASE','BASE','base','BASE!','🔵 BASE','ON-CHAIN','gm frens','wen moon','BASE'];
 
 function canvasResize() { bCanvas.width = window.innerWidth; bCanvas.height = window.innerHeight; }
 function rc() { return COLORS[Math.floor(Math.random() * COLORS.length)]; }
@@ -709,10 +737,45 @@ document.getElementById('azul-btn').addEventListener('click', async () => {
       }],
     });
 
+    // Start timer
+    const timerEl = document.getElementById('tx-timer');
+    const timerNum = document.getElementById('tx-timer-num');
+    const timerDone = document.getElementById('tx-timer-done');
+    const timerLabel = document.getElementById('tx-timer-label');
+    timerEl.classList.add('visible');
+    status.textContent = '';
+
+    const startTime = Date.now();
+    const timerInterval = setInterval(() => {
+      const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+      timerNum.textContent = elapsed + 's';
+    }, 100);
+
+    // Poll for receipt
+    const rpc = 'https://sepolia.base.org';
+    let receipt = null;
+    while (!receipt) {
+      await new Promise(r => setTimeout(r, 500));
+      try {
+        const res = await fetch(rpc, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ jsonrpc: '2.0', method: 'eth_getTransactionReceipt', params: [txHash], id: 1 })
+        });
+        const data = await res.json();
+        if (data.result) receipt = data.result;
+      } catch(e) {}
+    }
+
+    clearInterval(timerInterval);
+    const finalTime = ((Date.now() - startTime) / 1000).toFixed(2);
+    timerNum.textContent = finalTime + 's';
+    timerLabel.textContent = 'Confirmation time';
+    timerDone.textContent = finalTime < 2 ? '⚡ Sub-second finality!' : finalTime < 5 ? '🔵 Lightning fast!' : '✅ Confirmed!';
+
     document.getElementById('azul-tx-hash').textContent = txHash;
     document.getElementById('azul-tx-link').href = 'https://sepolia.basescan.org/tx/' + txHash;
     result.classList.add('visible');
-    status.textContent = '';
     btn.textContent = 'TX sent!';
   } catch(e) {
     status.className = 'azul-status error';
