@@ -776,7 +776,7 @@ document.getElementById('azul-btn').addEventListener('click', async () => {
     const finalTime = ((Date.now() - startTime) / 1000).toFixed(2);
     timerNum.textContent = finalTime + 's';
     timerLabel.textContent = 'Confirmation time';
-    timerDone.textContent = finalTime < 2 ? '⚡ Sub-second finality!' : finalTime < 5 ? '🔵 Lightning fast!' : '✅ Confirmed!';
+    timerDone.textContent = finalTime < 1 ? '⚡ Sub-second finality!' : finalTime < 3 ? '🔵 Lightning fast!' : finalTime < 6 ? '✅ Confirmed!' : '🐢 Slow block, try again';
 
     document.getElementById('azul-tx-hash').textContent = txHash;
     document.getElementById('azul-tx-link').href = 'https://sepolia.basescan.org/tx/' + txHash;
