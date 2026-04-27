@@ -709,9 +709,13 @@ document.getElementById('azul-btn').addEventListener('click', async () => {
 
   try {
     btn.disabled = true;
+    btn.textContent = 'Test AZUL on Sepolia';
     status.className = 'azul-status';
     status.textContent = 'Connecting to MetaMask...';
     result.classList.remove('visible');
+    document.getElementById('tx-timer').classList.remove('visible');
+    document.getElementById('tx-timer-num').textContent = '0.0s';
+    document.getElementById('tx-timer-done').textContent = '';
 
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
     const from = accounts[0];
@@ -781,7 +785,8 @@ document.getElementById('azul-btn').addEventListener('click', async () => {
     document.getElementById('azul-tx-hash').textContent = txHash;
     document.getElementById('azul-tx-link').href = 'https://sepolia.basescan.org/tx/' + txHash;
     result.classList.add('visible');
-    btn.textContent = 'TX sent!';
+    btn.textContent = 'Test Again ↺';
+    btn.disabled = false;
   } catch(e) {
     status.className = 'azul-status error';
     status.textContent = e.code === 4001 ? 'Transaction rejected.' : 'Error: ' + (e.message || 'Unknown error');
